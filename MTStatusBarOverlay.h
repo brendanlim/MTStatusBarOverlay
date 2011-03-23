@@ -78,6 +78,7 @@ typedef enum MTMessageType {
 // a detail-view that shows additional information. You can show a history of all the previous
 // messages for free by setting historyEnabled to YES
 @interface MTStatusBarOverlay : UIWindow <UITableViewDataSource> {
+	CGRect statusBarFrame_;
 	// holds all subviews, is touchable to change size of Status Bar
 	UIView *backgroundView_;
 	// the view that is shown in animation mode "FallDown" when the user touches the status bar

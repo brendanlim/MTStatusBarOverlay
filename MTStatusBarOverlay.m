@@ -269,23 +269,23 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+		statusBarFrame_ = [UIApplication sharedApplication].statusBarFrame;
 
 		// only use height of 20px even is status bar is doubled
-		statusBarFrame.size.height = statusBarFrame.size.height == 2*kStatusBarHeight ? kStatusBarHeight : statusBarFrame.size.height;
+		statusBarFrame_.size.height = statusBarFrame_.size.height == 2*kStatusBarHeight ? kStatusBarHeight : statusBarFrame_.size.height;
 		// if we are on the iPad but in iPhone-Mode (non-universal-app) correct the width
 		if(IsIPhoneEmulationMode) {
-			statusBarFrame.size.width = 320;
+			statusBarFrame_.size.width = 320;
 		}
 
 		// Place the window on the correct level and position
         self.windowLevel = UIWindowLevelStatusBar+1.0f;
-        self.frame = statusBarFrame;
+        self.frame = statusBarFrame_;
 		self.alpha = 0.0f;
 		self.hidden = NO;
 
 		// Default Small size: just show Activity Indicator
-		smallFrame_ = CGRectMake(statusBarFrame.size.width - kWidthSmall, 0.0f, kWidthSmall, statusBarFrame.size.height);
+		smallFrame_ = CGRectMake(statusBarFrame_.size.width - kWidthSmall, 0.0f, kWidthSmall, statusBarFrame_.size.height);
 
 		// Default-values
 		animation_ = MTStatusBarOverlayAnimationNone;
@@ -336,7 +336,7 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 		[self addSubview:detailView_];
 
         // Create view that stores all the content
-        backgroundView_ = [[UIView alloc] initWithFrame:statusBarFrame];
+        backgroundView_ = [[UIView alloc] initWithFrame:statusBarFrame_];
 		backgroundView_.clipsToBounds = YES;
 		backgroundView_.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         oldBackgroundViewFrame_ = backgroundView_.frame;
