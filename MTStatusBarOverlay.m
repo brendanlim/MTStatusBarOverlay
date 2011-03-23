@@ -938,6 +938,7 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 						 animations: ^{
 							 self.detailView.frame = CGRectMake(self.detailView.frame.origin.x, - self.detailView.frame.size.height,
 																self.detailView.frame.size.width, self.detailView.frame.size.height);
+							 self.frame = statusBarFrame_;
 						 }
 						 completion:NULL];
 	}
@@ -956,14 +957,20 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 
 								 self.historyTableView.frame = CGRectMake(self.historyTableView.frame.origin.x, kStatusBarHeight - y,
 																		  self.historyTableView.frame.size.width, self.historyTableView.frame.size.height);
+								 self.frame = CGRectMake(statusBarFrame_.origin.x, statusBarFrame_.origin.y, statusBarFrame_.size.width,
+																				 MAX(statusBarFrame_.size.height, self.historyTableView.frame.size.height + kStatusBarHeight - y));
 							 }
 
 							 if (self.detailViewMode == MTDetailViewModeDetailText) {
 								 self.detailView.frame = CGRectMake(self.detailView.frame.origin.x, y,
 																	self.detailView.frame.size.width, self.detailTextView.frame.size.height + kStatusBarHeight);
+								 self.frame = CGRectMake(statusBarFrame_.origin.x, statusBarFrame_.origin.y, statusBarFrame_.size.width,
+																				 MAX(statusBarFrame_.size.height, self.detailView.frame.size.height + y));
 							 } else {
 								 self.detailView.frame = CGRectMake(self.detailView.frame.origin.x, y,
 																	self.detailView.frame.size.width, self.detailView.frame.size.height);
+								 self.frame = CGRectMake(statusBarFrame_.origin.x, statusBarFrame_.origin.y, statusBarFrame_.size.width,
+																				 MAX(statusBarFrame_.size.height, self.detailView.frame.size.height + y));
 							 }
 						 }
 						 completion:NULL];
